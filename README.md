@@ -3,14 +3,17 @@
 **Contribution Number:** 1  
 **Student:** Nafiul Khalid | Florida International University  
 **Issue:** [Link](https://github.com/pytorch/ignite/issues/1657)  
-**Status:** [Phase I] [In Progress]
-> [!NOTE]
-> Upcoming phases are commented out.
+**Status:** Phase I Complete
+
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+**1. Clear and complete instructions by the maintainer:** Two issue files and one reference file are given with clear line numbers. Functions already exist in both issue files. I am not building or designing anything from scratch. I am only rewriting the internals of these functions following the reference file. Maintainer has also clearly stated the current and expected conditions of this issue.
+
+**2. Technically challenging, but doable in 3-4 weeks:** I already understand Python, Pytest, and PyTorch. With this issue, I will get an explosure and practical knowledge about distributed computing patterns. With assistance of Claude, I have drafted a 5-day roadmap to learn the fundamentals of distributed computing, and a 14-day extensive roadmap to learn in-depth of these patterns.
+
+**3. Future Goal aligned:** I aim to be a Software Engineer specialized in Machine Learning (ML). Spending time in this PyTorch library, specifically Ignite, is an investment to my future goal, regardless of PR result. Because distributed-context-aware patterns are common or expected to appear in real ML engineering work.
 
 ---
 
@@ -18,19 +21,40 @@
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+There are two files `test_confusion_matrix.py` and `test_multilabel_confusion_matrix.py`. Here, the distributed tests are broken. Maintainer provided a reference file, `test_recall.py` for the fix.
+The maintainer clearly mentioned that in both CM and MLCM, the test data is generating without considering distributed context. It needs to consider distributed context.
+* In technical terms: existing `_test_distrib_multiclass_images()` of CM and MLCM calls `get_y_true_y_pred()`, which returns a fixed 30 * 30 numpy image. As every distributed process/rank uses the same data, the tests aren't actually validating the distributed reduction (all-reduce) logic.
+<img width="560" height="140" alt="Screenshot 2026-06-07 at 11 26 18 PM" src="https://github.com/user-attachments/assets/64b57529-403a-496c-b911-3de42445ab69" />
+
+Code from `test_confusion_matrix.py`
+
+<img width="637" height="147" alt="Screenshot 2026-06-07 at 11 24 50 PM" src="https://github.com/user-attachments/assets/66a4c6d8-5018-43a6-a8d4-98fa431f661b" />
+
+Code from `test_multilabel_confusion_matrix.py`
+
+> [!NOTE]
+> CM = Confusion Matrix
+> 
+> MLCM = MultiLabel Confusion Matrix
+
 
 ### Expected Behavior
 
-[What should happen?]
+Data generation should be rank-aware.
+* Each process takes its own slice based on `idist.get_rank(), so that the full distributed run collectively covers the entire global dataset – and compute() can be verified against the sklearn result on the whole dataset.
+* **Fix**: Only needs to change 'how the data is generated' for CM and MLCM tests, similar to `test_recall.py`.
 
 ### Current Behavior
 
-[What actually happens?]
+Current distributed tests for CM and MLCM are broken.
+* While distributed test functions exist, the data inside them is **rank-unaware**
+* **Issue**: When running in a multi-process distributed setup, each process/rank currently generates the same test data, because each rank doesn't account for the distributed context.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+No production code changes are required. 
+1. `tests/ignite/metrics/test_confusion_matrix.py` — specifically the `_test_distrib_multiclass_images` helper and its inner _test function
+2. `tests/ignite/metrics/test_multilabel_confusion_matrix.py` — the same `_test_distrib_multiclass_images` helper, and the seven commented-out distributed test entry points at the end of the file
 
 ---
 
