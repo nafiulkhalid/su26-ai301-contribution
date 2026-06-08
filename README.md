@@ -3,6 +3,8 @@
 **Contribution Number:** 1  
 **Student:** Nafiul Khalid | Florida International University  
 **Issue:** [Link](https://github.com/pytorch/ignite/issues/1657)  
+**Forked**: [Link](https://github.com/nafiulkhalid/ignite)
+
 **Status:** Phase I Complete
 
 ---
@@ -14,6 +16,8 @@
 **2. Technically challenging, but doable in 3-4 weeks:** I already understand Python, Pytest, and PyTorch. With this issue, I will get an explosure and practical knowledge about distributed computing patterns. With assistance of Claude, I have drafted a 5-day roadmap to learn the fundamentals of distributed computing, and a 14-day extensive roadmap to learn in-depth of these patterns.
 
 **3. Future Goal aligned:** I aim to be a Software Engineer specialized in Machine Learning (ML). Spending time in this PyTorch library, specifically Ignite, is an investment to my future goal, regardless of PR result. Because distributed-context-aware patterns are common or expected to appear in real ML engineering work.
+
+**4. Checklist score:** This project meets all 6 points in the checklist for me. I understand the problem. I am experienced with the tech stack. There are clear setup documentation and instructions. The issue is doable in 3-4 weeks. There are enough comments and a merged PR added in the issue that collectively give me a good context.
 
 ---
 
