@@ -44,8 +44,8 @@ Code from `test_multilabel_confusion_matrix.py`
 
 ### Expected Behavior
 
-Data generation should be rank-aware.
-* Each process takes its own slice based on `idist.get_rank(), so that the full distributed run collectively covers the entire global dataset – and compute() can be verified against the sklearn result on the whole dataset.
+Data generation should be **rank-aware**.
+* Each process takes its own slice based on `idist.get_rank()`, so that the full distributed run collectively covers the entire global dataset – and `compute()` can be verified against the sklearn result on the whole dataset.
 * **Fix**: Only needs to change 'how the data is generated' for CM and MLCM tests, similar to `test_recall.py`.
 
 ### Current Behavior
