@@ -11,7 +11,7 @@
 
 ## Why I Chose This Issue
 
-**1. Clear and complete instructions by the maintainer:** Two issue files and one reference file are given with clear line numbers. Functions already exist in both issue files. I am not building or designing anything from scratch. I am only rewriting the internals of these functions following the reference file. Maintainer has also clearly stated the current and expected conditions of this issue.
+**1. Clear and complete instructions by the maintainer:** Maintainer opened the issue with clear instructions and relevant files [comment](https://github.com/pytorch/ignite/issues/1657#issue-812708915). Two issue files and one reference file are given with clear line numbers. Functions already exist in both issue files. I am not building or designing anything from scratch. I am only rewriting the internals of these functions following the reference file. Maintainer has also clearly stated the current and expected conditions of this issue. 
 
 **2. Technically challenging, but doable in 3-4 weeks:** I already understand Python, Pytest, and PyTorch. With this issue, I will get an explosure and practical knowledge about distributed computing patterns. With assistance of Claude, I have drafted a 5-day roadmap to learn the fundamentals of distributed computing, and a 14-day extensive roadmap to learn in-depth of these patterns.
 
