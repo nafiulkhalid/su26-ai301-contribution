@@ -33,7 +33,7 @@
 [Which parts of the codebase are involved?]
 
 ---
-<!--
+
 ## Reproduction Process
 
 ### Environment Setup
@@ -157,4 +157,3 @@ Using UMPIRE framework (adapted):
 - [Tutorial or Stack Overflow post that helped]
 - [GitHub issues or discussions that helped]
 
--->
